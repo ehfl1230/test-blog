@@ -56,12 +56,11 @@ systemctl enable php-fpm
 
 
 
-  location ~ [^/]\.php(/|$) {
-                fastcgi_split_path_info ^(.+?\.php)(/.*)$;
-                if (!-f $document_root$fastcgi_script_name) {
-                    return 404;
+  location ~ [^/]\.php(/|$) {  
+                fastcgi_split_path_info ^(.+?\.php)(/.*)$;  
+                if (!-f $document_root$fastcgi_script_name) {  
+                    return 404;  
                 }
-
                 # Mitigate https://httpoxy.org/ vulnerabilities
                 fastcgi_param HTTP_PROXY "";
 
