@@ -96,3 +96,47 @@ $arr = array(
 foreach ($arr as $key => $value) {
     echo "배열 \$arr에서 키값 '{$key}'에 대한 값은 {$value}입니다.<br>";
 }
+
+# 배열
+## 1차원 배열 
+$배열이름 = array();
+$배열이름 = array(배열요소1, 배열요소2, ...);
+
+## 2차원 배열
+$배열이름 = array(
+    array(),
+    array(),
+    ...
+);
+
+## 3차원 배열 
+$배열이름 = array(
+    array(
+
+        array(),
+
+        array(),
+
+        ...
+
+    ),
+    array(
+
+        array(),
+
+        array(),
+
+        ...
+
+    ),
+    ...
+);
+
+# 함수
+## 함수 선언
+function 함수이름(매개변수1, 매개변수2,...)
+
+{
+    함수가 호출 되었을 때 실행될 코드;
+}
+
