@@ -86,27 +86,26 @@ Route::get('admin/profile', ['middleware' => 'auth', function () {
 
 ## 기본적인 컨트롤러 
 모든 컨트롤러는 base 컨트롤러를 상속받아야 함.
-<?php
+<?php  
+namespace App\Http\Controllers;  
 
-namespace App\Http\Controllers;
+use App\User;  
+use App\Http\Controllers\Controller;  
 
-use App\User;
-use App\Http\Controllers\Controller;
-
-class UserController extends Controller
-{
-    /**
-     * Show the profile for the given user.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function showProfile($id)
-    {
-        return view('user.profile', ['user' => User::findOrFail($id)]);
-    }
-}
-다음과 같이 라우트를 지정할 수 있다.
+class UserController extends Controller  
+{  
+    /**  
+     * Show the profile for the given user.  
+     *  
+     * @param  int  $id  
+     * @return Response  
+     */  
+    public function showProfile($id)  
+    {  
+        return view('user.profile', ['user' => User::findOrFail($id)]);  
+    }  
+}  
+다음과 같이 라우트를 지정할 수 있다.  
 Route::get('user/{id}', 'UserController@showProfile');
 
 ## 컨트롤러 미들웨어 
