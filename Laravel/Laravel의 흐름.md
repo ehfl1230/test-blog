@@ -1,3 +1,5 @@
+https://laravel.kr/docs/5.8/container 에서 필요한 부분만 발췌한 글임.
+
 HTTP 라우팅
 -> HTTP 컨트롤러
 
@@ -27,42 +29,35 @@ HTTP 미들웨어는 애플리케이션으로 들어온 HTTP 요청을 간편하
 php artisan make:middleware OldMiddleware
 -> app/Http/Middleware 디렉토리에 들어감.
 
-## Before / After 미들웨어 
-### Before
-<?php
-
+## Before / After 미들웨어   
+### Before  
+\<\?php
 namespace App\Http\Middleware;
-
 use Closure;
 
 class BeforeMiddleware
-{
-    public function handle($request, Closure $next)
-    {
-        // Perform action
-
-        return $next($request);
-    }
-}
+{  
+    public function handle($request, Closure $next)  
+    {  
+        // Perform action  
+        return $next($request);  
+    }  
+}  
 
 ### After
-<?php
-
-namespace App\Http\Middleware;
-
+```<?php
+namespace App\Http\Middleware;  
 use Closure;
-
-class AfterMiddleware
-{
-    public function handle($request, Closure $next)
-    {
-        $response = $next($request);
-
-        // Perform action
-
-        return $response;
-    }
+class AfterMiddleware  
+{  
+    public function handle($request, Closure $next)  
+    {  
+        $response = $next($request);  
+        // Perform action  
+        return $response;  
+    }  
 }
+```
 
 ## 미들웨어 등록하기
 ### 글로벌-전역 미들웨어 
@@ -84,9 +79,9 @@ Route::get('admin/profile', ['middleware' => 'auth', function () {
 애플리케이션의 요청에 대한 모든 처리 로직을 routes.php 파일 하나에 정의하는 것보다 별도의 컨트롤러 클래스를 통해 구성할 수 있음.
 컨트롤러는 일반적으로 app/Http/Controllers 디렉토리에 저장한다.
 
-## 기본적인 컨트롤러 
-모든 컨트롤러는 base 컨트롤러를 상속받아야 함.
-<?php  
+## 기본적인 컨트롤러  
+모든 컨트롤러는 base 컨트롤러를 상속받아야 함.  
+```<?php  
 namespace App\Http\Controllers;  
 
 use App\User;  
@@ -104,26 +99,26 @@ class UserController extends Controller
     {  
         return view('user.profile', ['user' => User::findOrFail($id)]);  
     }  
-}  
+}
+```
 다음과 같이 라우트를 지정할 수 있다.  
-Route::get('user/{id}', 'UserController@showProfile');
+Route::get('user/{id}', 'UserController@showProfile');  
 
-## 컨트롤러 미들웨어 
-특정 컨트롤러에서 미들웨어를 지정하고 싶으면 컨트롤러의 생성자에서 middleware 메소드를 사용하면 된다.
-public function __construct()
-    {
-        $this->middleware('auth');
-
-        $this->middleware('log', ['only' => ['fooAction', 'barAction']]);
-
-        $this->middleware('subscribed', ['except' => ['fooAction', 'barAction']]);
-    }
-    
-## RESTful 리소스 컨트롤러 
-php artisan make:controller PhotoController'
-Route::resource('photo', 'PhotoController');를 등록하면 됨.
-
-## 묵시적 컨트롤러
+## 컨트롤러 미들웨어  
+특정 컨트롤러에서 미들웨어를 지정하고 싶으면 컨트롤러의 생성자에서 middleware 메소드를 사용하면 된다.  
+```
+public function __construct()   
+{  
+    $this->middleware('auth');  
+    $this->middleware('log', ['only' => ['fooAction', 'barAction']]);  
+    $this->middleware('subscribed', ['except' => ['fooAction', 'barAction']]);  
+}
+```
+## RESTful 리소스 컨트롤러  
+php artisan make:controller PhotoController'  
+Route::resource('photo', 'PhotoController');를 등록하면 됨.  
+  
+## 묵시적 컨트롤러  
 
 
 public/index.php 파일 시작점. index.php 파일은 컴포저가 생성한 오토로더 정의를 로딩함. 
